@@ -1,10 +1,36 @@
-import PlaceCardComponent from "../../views/place-card/place-card";
+import PlaceCardComponent from '../../components/place-card/place-card';
 
-type AppProps = {offersQuantity: number};
+type MainPageProps = {
+  offersQuantity: number;
+};
 
-export default function App({offersQuantity}: AppProps): JSX.Element {
+function NavigationItem(props: {selected: boolean; name: string; link: string}): JSX.Element {
+  return (
+    <li className="locations__item">
+      <a className={'locations__item-link tabs__item' + (props.selected ? ' tabs__item--active' : '')} href={props.link}>
+        <span>{props.name}</span>
+      </a>
+    </li>
+  );
+}
+
+export default function MainPage({offersQuantity}: MainPageProps): JSX.Element {
 
   const offersCards = Array.from({length: offersQuantity}, () => <PlaceCardComponent />);
+
+  const citiesData = [
+    { name: 'Paris', link: '#', selected: true },
+    { name: 'Cologne', link: '#', selected: false },
+    { name: 'Brussels', link: '#', selected: false },
+    { name: 'Amsterdam', link: '#', selected: false },
+    { name: 'Hamburg', link: '#', selected: false },
+    { name: 'Dusseldorf', link: '#', selected: false },
+  ];
+
+
+  const cities = Array.from(citiesData, (city) => {
+    return ( <NavigationItem {...city} />);
+  });
 
   return (
     <div className="page page--gray page--main">
@@ -42,36 +68,9 @@ export default function App({offersQuantity}: AppProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+
+              {cities}
+
             </ul>
           </section>
         </div>
@@ -82,6 +81,7 @@ export default function App({offersQuantity}: AppProps): JSX.Element {
               <b className="places__found">312 places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
+                &nbsp;
                 <span className="places__sorting-type" tabIndex={0}>
                   Popular
                   <svg className="places__sorting-arrow" width="7" height="4">
@@ -97,7 +97,7 @@ export default function App({offersQuantity}: AppProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-              {offersCards}
+                {offersCards}
 
               </div>
             </section>
