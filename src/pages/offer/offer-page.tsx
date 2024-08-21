@@ -1,7 +1,7 @@
 
 type LoginInfo = {isUserLogged: number, user: {email: string, favoriteCount: number}};
 
-export default function OfferComponent({isUserLogged, user: {email, favoriteCount}}: LoginInfo): JSX.Element {
+export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: LoginInfo): JSX.Element {
 
   let navList = null;
   if (isUserLogged) {

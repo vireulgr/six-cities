@@ -1,14 +1,12 @@
-import FavoritesItem from '../../components/favorite-item/favorite-item';
+import FavoritesItemComponent from '../../components/favorites-item/favorites-item';
+import { FavoritesItem } from '../../utils/types';
 
 type FavoritesPageProps = {
-  favorites: { name: string; }[];
+  userEmail: string;
+  favorites: FavoritesItem[];
 };
 
-const favorites = [
-  { cityId: 'Amsterdam', offerId: 'werwer'},
-];
-
-export default function FavoritesPage({favorites}: FavoritesPageProps): JSX.Element {
+export default function FavoritesPage({userEmail, favorites}: FavoritesPageProps): JSX.Element {
 
   if (!favorites.length) {
     return (
@@ -27,8 +25,8 @@ export default function FavoritesPage({favorites}: FavoritesPageProps): JSX.Elem
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">0</span>
+                    <span className="header__user-name user__name">{userEmail}</span>
+                    <span className="header__favorite-count">{favorites.length}</span>
                   </a>
                 </li>
                 <li className="header__nav-item">
@@ -62,11 +60,9 @@ export default function FavoritesPage({favorites}: FavoritesPageProps): JSX.Elem
     );
   }
 
-  const favoritesCards = Array.from(favorites, (favorite) => <FavoriteCard name={favorite.name} />);
-
+  const favoritesCount = favorites.reduce((acc, city) => acc + city.places.length, 0);
   return (
   <>
-    <h3>hello favorites page</h3>
     <div className="page">
       <header className="header">
         <div className="container">
@@ -82,8 +78,8 @@ export default function FavoritesPage({favorites}: FavoritesPageProps): JSX.Elem
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__user-name user__name">{userEmail}</span>
+                    <span className="header__favorite-count">{favoritesCount}</span>
                   </a>
                 </li>
                 <li className="header__nav-item">
@@ -102,14 +98,7 @@ export default function FavoritesPage({favorites}: FavoritesPageProps): JSX.Elem
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-
-              <FavoritesItem />
-
-              <FavoritesItem />
-
-              <FavoritesItem />
-    {favoritesCards}
-
+              <FavoritesItemComponent items={favorites} />
             </ul>
           </section>
         </div>
