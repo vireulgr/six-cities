@@ -1,10 +1,11 @@
+import { Location } from '../utils/types';
 
-type Location = {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-};
 
-const LOCATIONS: Location[] = [
+export const LOCATIONS: Location[] = [
+  {
+    latitude: 52.35514938496378,
+    longitude: 4.673877537499948,
+    zoom: 8
+  }
 ];
 

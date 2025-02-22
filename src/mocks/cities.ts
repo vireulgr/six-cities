@@ -1,13 +1,8 @@
-import { Location } from '../utils/types';
-
-export type City = {
-  name: string;
-  location: Location;
-};
+import { City } from '../utils/types';
 
 export const CITIES: City[] = [
   {
-    name: "Johannesburg",
+    name: 'Johannesburg',
     location: {
       latitude: -26.206886,
       longitude: 28.042428,
@@ -15,7 +10,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Manila",
+    name: 'Manila',
     location: {
       latitude: 14.583266,
       longitude: 120.979633,
@@ -23,7 +18,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Jakarta",
+    name: 'Jakarta',
     location: {
       latitude: -6.175,
       longitude: 106.8275,
@@ -31,7 +26,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Kolkata",
+    name: 'Kolkata',
     location: {
       latitude: 22.5675,
       longitude: 88.37,
@@ -39,7 +34,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Mumbai",
+    name: 'Mumbai',
     location: {
       latitude: 19.076111,
       longitude: 72.8775,
@@ -47,7 +42,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Budapest",
+    name: 'Budapest',
     location: {
       latitude: 47.4925,
       longitude: 19.051389,
@@ -55,7 +50,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Bordeaux",
+    name: 'Bordeaux',
     location: {
       latitude: 44.84,
       longitude:  -0.58,
@@ -63,7 +58,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Oslo",
+    name: 'Oslo',
     location: {
       latitude: 59.913333,
       longitude: 10.738889,
@@ -71,7 +66,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Baghdad",
+    name: 'Baghdad',
     location: {
       latitude: 33.315278,
       longitude: 44.366111,
@@ -79,7 +74,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Porto",
+    name: 'Porto',
     location: {
       latitude: 41.162142,
       longitude: -8.621953,
@@ -87,7 +82,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Amsterdam",
+    name: 'Amsterdam',
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
@@ -95,7 +90,7 @@ export const CITIES: City[] = [
     }
   },
   {
-    name: "Reykjavík",
+    name: 'Reykjavík',
     location: {
       latitude: 64.146667,
       longitude: -21.94,

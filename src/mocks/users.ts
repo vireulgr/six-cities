@@ -1,4 +1,5 @@
 import { getRandomArrayElement } from '../utils/common';
+import { User } from '../utils/types';
 
 const USER_NAMES = [
   'Andrey Kolmogorov',
@@ -37,17 +38,11 @@ const USER_NAMES = [
   'Yoanis Meneses',
 ];
 
-export type User = {
-  name: string;
-  avatarUrl: string;
-  isPro: boolean;
-};
-
 
 export function getUser(): User {
   return {
     name: getRandomArrayElement(USER_NAMES),
     avatarUrl: 'https://i.pravatar.cc/150',
     isPro: Boolean(Math.round(Math.random()))
-  }
+  };
 }
