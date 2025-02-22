@@ -1,18 +1,18 @@
+import { RentalOffer } from '../../utils/types';
 
-type LoginInfo = {isUserLogged: number, user: {email: string, favoriteCount: number}};
+type UserMenuComponentProps = { loginInfo: LoginInfo };
 
-export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: LoginInfo): JSX.Element {
-
+function UserMenuComponent({loginInfo}: UserMenuComponentProps): JSX.Element {
   let navList = null;
-  if (isUserLogged) {
+  if (loginInfo.isUserLogged) {
     navList = (
       <ul className="header__nav-list">
         <li className="header__nav-item user">
           <a className="header__nav-link header__nav-link--profile" href="#">
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
-            <span className="header__user-name user__name">{email}</span>
-            <span className="header__favorite-count">{favoriteCount}</span>
+            <span className="header__user-name user__name">{loginInfo.user.email}</span>
+            <span className="header__favorite-count">{loginInfo.user.favoriteCount}</span>
           </a>
         </li>
         <li className="header__nav-item">
@@ -22,8 +22,7 @@ export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: 
         </li>
       </ul>
     );
-  }
-  else {
+  } else {
     navList = (
       <ul className="header__nav-list">
         <li className="header__nav-item user">
@@ -37,6 +36,35 @@ export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: 
     );
   }
 
+  return navList;
+}
+
+function imageWrapper(src: string, key: number): JSX.Element {
+  return (
+    <div key={key} className="offer__image-wrapper">
+      <img className="offer__image" src={src} alt="Photo studio" />
+    </div>
+  );
+}
+
+
+type LoginInfo = {
+  isUserLogged: boolean;
+  user?: {
+    email: string;
+    favoriteCount: number;
+  };
+};
+
+type OfferPageProps = {
+  loginInfo: LoginInfo;
+  offer: RentalOffer;
+};
+
+export default function OfferPage({loginInfo, offer}: OfferPageProps): JSX.Element {
+
+  const offerImages = Array.from(offer.images, (image, idx) => imageWrapper(image.preview, idx));
+
   return (
     <div className="page">
       <header className="header">
@@ -48,7 +76,7 @@ export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: 
               </a>
             </div>
             <nav className="header__nav">
-              {navList}
+              <UserMenuComponent loginInfo={loginInfo}/>
             </nav>
           </div>
         </div>
@@ -58,24 +86,9 @@ export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: 
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/room.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
+
+              {offerImages}
+
             </div>
           </div>
           <div className="offer__container container">
@@ -96,7 +109,7 @@ export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: 
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: "80%"}}></span>
+                  <span style={{width: '80%'}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">4.8</span>
@@ -188,7 +201,7 @@ export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: 
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
                         <div className="reviews__stars rating__stars">
-                          <span style={{width: "80%"}}></span>
+                          <span style={{width: '80%'}}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -229,7 +242,7 @@ export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: 
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: "80%"}}></span>
+                      <span style={{width: '80%'}}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -261,7 +274,7 @@ export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: 
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: "80%"}}></span>
+                      <span style={{width: '80%'}}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -296,7 +309,7 @@ export default function OfferPage({isUserLogged, user: {email, favoriteCount}}: 
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: "100%"}}></span>
+                      <span style={{width: '100%'}}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>

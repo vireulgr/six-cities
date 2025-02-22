@@ -1,24 +1,25 @@
-import { FavoritesItem, Place } from '../../utils/types';
+import { FavoritesItem, Image, Place } from '../../utils/types';
+
+function Image(image: Image): JSX.Element {
+  return (
+    <a href={image.link}>
+      <img className="place-card__image" src={image.preview} width="150" height="110" alt={image.alt}/>
+    </a>);
+}
 
 function PlaceCard(props: Place): JSX.Element {
-  const images = Array.from(props.images, (image) => {
-    return (
-      <a href={image.link}>
-        <img className="place-card__image" src={image.preview} width="150" height="110" alt="Place image" />
-      </a>
-      );
-  });
+  const images = Array.from(props.images, (image) => <Image key={image.preview} {...image} />);
 
   return (
     <article className="favorites__card place-card">
       {
         props.isPremium
-        ? (
-          <div className="place-card__mark">
-            <span>Premium</span>
-          </div>
-        )
-        : null
+          ? (
+            <div className="place-card__mark">
+              <span>Premium</span>
+            </div>
+          )
+          : null
       }
       <div className="favorites__image-wrapper place-card__image-wrapper">
 
@@ -56,14 +57,13 @@ function PlaceCard(props: Place): JSX.Element {
 type FavoritesItemComponentProps = {
   items: FavoritesItem[];
 }
+
 export default function FavoritesItemComponent({items}: FavoritesItemComponentProps): JSX.Element {
   const markupItems = Array.from(items, (favorite) => {
-    const places = Array.from(favorite.places, (place) => {
-      return <PlaceCard {...place} />;
-    });
+    const places = Array.from(favorite.places, (place) => <PlaceCard key={place.id} {...place} />);
 
     return (
-      <li className="favorites__locations-items">
+      <li key={favorite.city.name} className="favorites__locations-items">
         <div className="favorites__locations locations locations--current">
           <div className="locations__item">
             <a className="locations__item-link" href={favorite.city.link}>

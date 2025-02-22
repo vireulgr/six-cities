@@ -3,15 +3,28 @@
 //import { FAVORITES_PAGE_DATA } from '../../mocks/favorites';
 //import FavoritesPage from '../../pages/favorites/favorites-page';
 
-import OfferPage from "../../pages/offer/offer-page";
+import { ONE_OFFER } from '../../mocks/offers';
+import OfferPage from '../../pages/offer/offer-page';
 
-type AppProps = {
-  offersQuantity: number
+const MOCK_LOGIN_INFO = {
+  isUserLogged: false,
+  user: {
+    name: '',
+    avatarUrl: '',
+    isPro: false,
+    email: 'user@domain.example.com',
+    favoriteCount: 3
+  },
 };
 
-export default function App({offersQuantity}: AppProps): JSX.Element {
+
+export default function App(/*{offersQuantity}: AppProps*/): JSX.Element {
   //return (<MainPage offersQuantity={offersQuantity} />);
   //return (<LoginPage />);
   //return (<FavoritesPage {...FAVORITES_PAGE_DATA} />);
-  return <OfferPage />;
+  const props = {
+    loginInfo: MOCK_LOGIN_INFO,
+    offer: ONE_OFFER,
+  };
+  return <OfferPage {...props}/>;
 }

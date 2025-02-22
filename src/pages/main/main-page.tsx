@@ -7,7 +7,7 @@ type MainPageProps = {
 function NavigationItem(props: {selected: boolean; name: string; link: string}): JSX.Element {
   return (
     <li className="locations__item">
-      <a className={'locations__item-link tabs__item' + (props.selected ? ' tabs__item--active' : '')} href={props.link}>
+      <a className={`locations__item-link tabs__item ${props.selected ? ' tabs__item--active' : ''}`} href={props.link}>
         <span>{props.name}</span>
       </a>
     </li>
@@ -16,7 +16,7 @@ function NavigationItem(props: {selected: boolean; name: string; link: string}):
 
 export default function MainPage({offersQuantity}: MainPageProps): JSX.Element {
 
-  const offersCards = Array.from({length: offersQuantity}, () => <PlaceCardComponent />);
+  const offersCards = Array.from({length: offersQuantity}, (_item, id) => <PlaceCardComponent key={id} />);
 
   const citiesData = [
     { name: 'Paris', link: '#', selected: true },
@@ -28,9 +28,7 @@ export default function MainPage({offersQuantity}: MainPageProps): JSX.Element {
   ];
 
 
-  const cities = Array.from(citiesData, (city) => {
-    return ( <NavigationItem {...city} />);
-  });
+  const cities = Array.from(citiesData, (city) => <NavigationItem key={city.name} {...city} />);
 
   return (
     <div className="page page--gray page--main">
